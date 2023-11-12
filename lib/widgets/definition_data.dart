@@ -29,11 +29,13 @@ class DefinitionData {
   static Section buildDefinition(ResultData data, int index, String word) {
     List<Widget> widgets = [];
 
-    widgets.add(Section(
-      content: <Widget>[SearchableText(text: data.etymology)],
-      title: Strings.etymologyHeader,
-      initiallyExpanded: false,
-    ));
+    if (data.etymology.isNotEmpty) {
+      widgets.add(Section(
+        content: <Widget>[SearchableText(text: data.etymology)],
+        title: Strings.etymologyHeader,
+        initiallyExpanded: false,
+      ));
+    }
 
     widgets.insertAll(
       widgets.length,
