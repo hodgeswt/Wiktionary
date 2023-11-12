@@ -7,9 +7,11 @@ class SearchableText extends StatefulWidget {
   const SearchableText({
     super.key,
     this.text = Strings.empty,
+    this.textAlign = TextAlign.left,
   });
 
   final String text;
+  final TextAlign textAlign;
 
   @override
   State<SearchableText> createState() => _SearchableTextState();
@@ -57,7 +59,10 @@ class _SearchableTextState extends State<SearchableText> {
         );
       },
       onSelectionChanged: _updateSelection,
-      child: Text(widget.text),
+      child: Text(
+        widget.text,
+        textAlign: widget.textAlign,
+      ),
     );
   }
 }

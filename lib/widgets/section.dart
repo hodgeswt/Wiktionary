@@ -34,10 +34,20 @@ class _SectionState extends State<Section> {
         ),
         child: Theme(
           data: Theme.of(context).copyWith(dividerColor: widget.dividerColor),
-          child: ExpansionTile(
-            title: Text(widget.title),
-            initiallyExpanded: widget.initiallyExpanded,
-            children: widget.content,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              ExpansionTile(
+                title: Text(widget.title),
+                initiallyExpanded: widget.initiallyExpanded,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: widget.content,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
