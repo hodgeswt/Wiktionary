@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wiktionary/constants/dynamic_theme.dart';
 import 'package:wiktionary/constants/numbers.dart';
 import 'package:wiktionary/constants/settings.dart';
 import 'package:wiktionary/constants/strings.dart';
@@ -38,16 +39,20 @@ class DefinitionData {
 
     if (data.etymology.isNotEmpty) {
       widgets.add(Section(
-        content: <Widget>[SearchableText(text: data.etymology)],
+        content: <Widget>[
+          ListTile(title: SearchableText(text: data.etymology))
+        ],
         title: Strings.etymologyHeader,
         initiallyExpanded: false,
       ));
     }
 
-    widgets.insertAll(
-      widgets.length,
-      _buildPronunciations(data.pronunciations),
-    );
+    if (data.pronunciations.text.isNotEmpty) {
+      widgets.insertAll(
+        widgets.length,
+        _buildPronunciations(data.pronunciations),
+      );
+    }
 
     widgets.insertAll(
       widgets.length,
@@ -71,10 +76,12 @@ class DefinitionData {
         _buildDefinitionTexts(definition.text),
       );
 
-      children.insertAll(
-        children.length,
-        _buildExamples(definition.examples),
-      );
+      if (definition.examples.isNotEmpty) {
+        children.insertAll(
+          children.length,
+          _buildExamples(definition.examples),
+        );
+      }
 
       children.insertAll(
         children.length,
@@ -100,7 +107,7 @@ class DefinitionData {
     List<Widget> children = [];
 
     for (String example in examples) {
-      children.add(SearchableText(text: example));
+      children.add(ListTile(title: SearchableText(text: example)));
     }
 
     Section section = Section(
@@ -109,6 +116,7 @@ class DefinitionData {
       initiallyExpanded: false,
       horizontalPadding: Numbers.definitionTextHorizontalPadding,
       verticalPadding: Numbers.definitionTextVerticalPadding,
+      dividerColor: DynamicTheme.dividerColor,
     );
 
     ret.add(
@@ -127,7 +135,7 @@ class DefinitionData {
     List<Widget> ret = [];
     List<Widget> children = [];
     for (String pronunciation in pronunciations.text) {
-      children.add(SearchableText(text: pronunciation));
+      children.add(ListTile(title: SearchableText(text: pronunciation)));
     }
 
     Section section = Section(
@@ -136,6 +144,7 @@ class DefinitionData {
       initiallyExpanded: false,
       horizontalPadding: Numbers.definitionTextHorizontalPadding,
       verticalPadding: Numbers.definitionTextVerticalPadding,
+      dividerColor: DynamicTheme.dividerColor,
     );
 
     ret.add(
@@ -155,7 +164,7 @@ class DefinitionData {
     for (RelatedWords relatedWord in relatedWords) {
       List<Widget> relations = [];
       for (String relation in relatedWord.words) {
-        relations.add(SearchableText(text: relation));
+        relations.add(ListTile(title: SearchableText(text: relation)));
       }
 
       Section relatedWords = Section(
@@ -164,6 +173,7 @@ class DefinitionData {
         initiallyExpanded: false,
         horizontalPadding: Numbers.definitionTextHorizontalPadding,
         verticalPadding: Numbers.definitionTextVerticalPadding,
+        dividerColor: DynamicTheme.dividerColor,
       );
 
       ret.add(
@@ -185,10 +195,13 @@ class DefinitionData {
     for (String definitionText in definitionTexts) {
       Section texts = Section(
         title: '${i++}',
-        content: <Widget>[SearchableText(text: definitionText)],
+        content: <Widget>[
+          ListTile(title: SearchableText(text: definitionText))
+        ],
         initiallyExpanded: false,
         horizontalPadding: Numbers.definitionTextHorizontalPadding,
         verticalPadding: Numbers.definitionTextVerticalPadding,
+        dividerColor: DynamicTheme.dividerColor,
       );
 
       ret.add(

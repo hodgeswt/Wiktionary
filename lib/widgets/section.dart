@@ -37,15 +37,22 @@ class _SectionState extends State<Section> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ExpansionTile(
-                title: Text(widget.title),
-                initiallyExpanded: widget.initiallyExpanded,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: widget.content,
+              Card(
+                clipBehavior: Clip.antiAlias,
+                color: BottomAppBarTheme.of(context).color,
+                child: ExpansionTile(
+                  title: Text(widget.title),
+                  initiallyExpanded: widget.initiallyExpanded,
+                  shape: const ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
-                ],
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: widget.content,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
