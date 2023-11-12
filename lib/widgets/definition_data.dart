@@ -73,6 +73,11 @@ class DefinitionData {
 
       children.insertAll(
         children.length,
+        _buildExamples(definition.examples),
+      );
+
+      children.insertAll(
+        children.length,
         _buildRelatedWords(definition.relatedWords),
       );
 
@@ -88,6 +93,34 @@ class DefinitionData {
     }
 
     return widgets;
+  }
+
+  static List<Widget> _buildExamples(List<String> examples) {
+    List<Widget> ret = [];
+    List<Widget> children = [];
+
+    for (String example in examples) {
+      children.add(SearchableText(text: example));
+    }
+
+    Section section = Section(
+      title: Strings.examplesHeader,
+      content: children,
+      initiallyExpanded: false,
+      horizontalPadding: Numbers.definitionTextHorizontalPadding,
+      verticalPadding: Numbers.definitionTextVerticalPadding,
+    );
+
+    ret.add(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          section,
+        ],
+      ),
+    );
+
+    return ret;
   }
 
   static List<Widget> _buildPronunciations(Pronunciations pronunciations) {
