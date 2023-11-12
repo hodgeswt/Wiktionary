@@ -6,12 +6,15 @@ class DioClient {
 
   final _baseUrl = "http://localhost:8000/word";
 
+  dynamic data = {};
+
   Future<Results?> getDefinition(String searchLang, String searchTerm) async {
     try {
       final response = await _dio.get(
         '$_baseUrl/$searchLang/$searchTerm',
       );
 
+      data = response.data;
       Results results = Results.fromJson(response.data);
 
       return results;

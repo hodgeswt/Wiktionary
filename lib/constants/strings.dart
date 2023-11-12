@@ -15,6 +15,9 @@ class Strings {
   static const String noResults = "No results found!";
 
   static const String etymologyHeader = "Etymology";
+  static const String examplesHeader = "Examples";
+  static const String pronunciationHeader = "Pronunciation";
+
   static const String searchViewTitle = "Search";
   static const String settingsViewTitle = "Settings";
   static const String welcomeText = "Welcome to Wiktionary!";

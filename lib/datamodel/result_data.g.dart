@@ -11,10 +11,13 @@ ResultData _$ResultDataFromJson(Map<String, dynamic> json) => ResultData(
       definitions: (json['definitions'] as List<dynamic>)
           .map((e) => Definition.fromJson(e as Map<String, dynamic>))
           .toList(),
+      pronunciations: Pronunciations.fromJson(
+          json['pronunciations'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ResultDataToJson(ResultData instance) =>
     <String, dynamic>{
       'etymology': instance.etymology,
       'definitions': instance.definitions,
+      'pronunciations': instance.pronunciations,
     };

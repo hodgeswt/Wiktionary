@@ -3,6 +3,7 @@ import 'package:wiktionary/constants/numbers.dart';
 import 'package:wiktionary/constants/settings.dart';
 import 'package:wiktionary/constants/strings.dart';
 import 'package:wiktionary/datamodel/definition.dart';
+import 'package:wiktionary/datamodel/pronunciations.dart';
 import 'package:wiktionary/datamodel/related_words.dart';
 import 'package:wiktionary/datamodel/result_data.dart';
 import 'package:wiktionary/datamodel/results.dart';
@@ -45,7 +46,12 @@ class DefinitionData {
 
     widgets.insertAll(
       widgets.length,
-      buildDefinitionTexts(data.definitions),
+      _buildPronunciations(data.pronunciations),
+    );
+
+    widgets.insertAll(
+      widgets.length,
+      _buildDefinitions(data.definitions),
     );
 
     return Section(
@@ -55,55 +61,20 @@ class DefinitionData {
     );
   }
 
-  static List<Widget> buildDefinitionTexts(List<Definition> definitions) {
+  static List<Widget> _buildDefinitions(List<Definition> definitions) {
     List<Widget> widgets = [];
     for (Definition definition in definitions) {
       List<Widget> children = [];
 
-      int i = 1;
-      for (String definitionText in definition.text) {
-        Section texts = Section(
-          title: '${i++}',
-          content: <Widget>[SearchableText(text: definitionText)],
-          initiallyExpanded: false,
-          horizontalPadding: Numbers.definitionTextHorizontalPadding,
-          verticalPadding: Numbers.definitionTextVerticalPadding,
-        );
+      children.insertAll(
+        children.length,
+        _buildDefinitionTexts(definition.text),
+      );
 
-        children.add(
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              texts,
-            ],
-          ),
-        );
-      }
-
-      i = 1;
-      for (RelatedWords relatedWord in definition.relatedWords) {
-        List<Widget> relations = [];
-        for (String relation in relatedWord.words) {
-          relations.add(SearchableText(text: relation));
-        }
-
-        Section relatedWords = Section(
-          title: relatedWord.relationshipType,
-          content: relations,
-          initiallyExpanded: false,
-          horizontalPadding: Numbers.definitionTextHorizontalPadding,
-          verticalPadding: Numbers.definitionTextVerticalPadding,
-        );
-
-        children.add(
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              relatedWords,
-            ],
-          ),
-        );
-      }
+      children.insertAll(
+        children.length,
+        _buildRelatedWords(definition.relatedWords),
+      );
 
       widgets.add(
         Section(
@@ -117,5 +88,86 @@ class DefinitionData {
     }
 
     return widgets;
+  }
+
+  static List<Widget> _buildPronunciations(Pronunciations pronunciations) {
+    List<Widget> ret = [];
+    List<Widget> children = [];
+    for (String pronunciation in pronunciations.text) {
+      children.add(SearchableText(text: pronunciation));
+    }
+
+    Section section = Section(
+      title: Strings.pronunciationHeader,
+      content: children,
+      initiallyExpanded: false,
+      horizontalPadding: Numbers.definitionTextHorizontalPadding,
+      verticalPadding: Numbers.definitionTextVerticalPadding,
+    );
+
+    ret.add(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          section,
+        ],
+      ),
+    );
+
+    return ret;
+  }
+
+  static List<Widget> _buildRelatedWords(List<RelatedWords> relatedWords) {
+    List<Widget> ret = [];
+    for (RelatedWords relatedWord in relatedWords) {
+      List<Widget> relations = [];
+      for (String relation in relatedWord.words) {
+        relations.add(SearchableText(text: relation));
+      }
+
+      Section relatedWords = Section(
+        title: relatedWord.relationshipType,
+        content: relations,
+        initiallyExpanded: false,
+        horizontalPadding: Numbers.definitionTextHorizontalPadding,
+        verticalPadding: Numbers.definitionTextVerticalPadding,
+      );
+
+      ret.add(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            relatedWords,
+          ],
+        ),
+      );
+    }
+
+    return ret;
+  }
+
+  static List<Widget> _buildDefinitionTexts(List<String> definitionTexts) {
+    List<Widget> ret = [];
+    int i = 1;
+    for (String definitionText in definitionTexts) {
+      Section texts = Section(
+        title: '${i++}',
+        content: <Widget>[SearchableText(text: definitionText)],
+        initiallyExpanded: false,
+        horizontalPadding: Numbers.definitionTextHorizontalPadding,
+        verticalPadding: Numbers.definitionTextVerticalPadding,
+      );
+
+      ret.add(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            texts,
+          ],
+        ),
+      );
+    }
+
+    return ret;
   }
 }
