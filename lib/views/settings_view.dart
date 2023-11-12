@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wiktionary/constants/numbers.dart';
 import 'package:wiktionary/constants/settings.dart';
 import 'package:wiktionary/constants/strings.dart';
 import 'package:wiktionary/widgets/rebuilder.dart';
@@ -152,12 +153,18 @@ class _SettingsViewState extends State<SettingsView> {
                     Expanded(
                       child: ListTile(
                         title: const Text(Strings.colorText),
-                        trailing: FloatingActionButton(
-                          backgroundColor: _colorState,
-                          onPressed: () {
-                            _showColorPicker(snapshot.data!);
-                          },
-                          shape: const CircleBorder(),
+                        trailing: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Numbers.defaultHorizontalPadding,
+                            vertical: Numbers.defaultVerticalPadding,
+                          ),
+                          child: FloatingActionButton(
+                            backgroundColor: _colorState,
+                            onPressed: () {
+                              _showColorPicker(snapshot.data!);
+                            },
+                            shape: const CircleBorder(),
+                          ),
                         ),
                         onTap: () {
                           _showColorPicker(snapshot.data!);
