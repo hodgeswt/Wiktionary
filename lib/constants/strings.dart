@@ -12,7 +12,7 @@ class Strings {
   static const String backButton = "Back";
 
   static const String error = "Error loading data";
-  static const String noResults = "No results found!";
+  static const String noResults = "No results found for";
 
   static const String etymologyHeader = "Etymology";
   static const String examplesHeader = "Examples";

@@ -21,6 +21,10 @@ class DefinitionData {
 
     List<ResultData> data = results.results;
 
+    if (data.first.definitions.isEmpty) {
+      return Card(child: ListTile(title: Text('${Strings.noResults} "$word"')));
+    }
+
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
