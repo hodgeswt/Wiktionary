@@ -5,6 +5,7 @@ import 'package:wiktionary/api/dio_client.dart';
 
 class ResultsView extends StatefulWidget {
   const ResultsView({super.key, required this.searchTerm});
+
   final String searchTerm;
 
   @override

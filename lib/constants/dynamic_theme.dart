@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wiktionary/constants/settings.dart';
+import 'package:wiktionary/settings.dart';
 
 class DynamicTheme {
   const DynamicTheme._();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wiktionary/constants/settings.dart';
+import 'package:wiktionary/settings.dart';
 import 'package:wiktionary/constants/strings.dart';
 import 'package:wiktionary/views/main_view.dart';
 import 'package:wiktionary/widgets/rebuilder.dart';
@@ -19,12 +19,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late Future<SharedPreferences> _prefs;
 
-  void _loadPreferences(SharedPreferences prefs) {
-    Settings.darkMode = prefs.getBool("darkMode") ?? Settings.defaultDarkMode;
-    Settings.color =
-        Color(prefs.getInt("color") ?? Settings.defaultColor.value);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -39,7 +33,7 @@ class _MyAppState extends State<MyApp> {
           future: _prefs,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              _loadPreferences(snapshot.data!);
+              Settings.loadPreferences(snapshot.data!);
             }
 
             return MaterialApp(

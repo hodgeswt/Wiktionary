@@ -10,6 +10,7 @@ class Strings {
   static const String okButton = "OK";
   static const String cancelButton = "Cancel";
   static const String backButton = "Back";
+  static const String saveConnectionButton = "Save Connection";
 
   static const String error = "Error loading data";
   static const String noResults = "No results found for";
@@ -24,8 +25,15 @@ class Strings {
   static const String serachContextText = "Search with Wiktionary";
 
   static const String appearanceTitle = "Appearance";
+  static const String connectionTitle = "Connection";
   static const String lightModeText = "Light Mode";
   static const String colorText = "Primary Color";
+  static const String apiHostLabel = "API Hostname";
+  static const String apiPortLabel = "API Port";
+
+  static const String nonNullFieldError = "This field cannot be empty.";
+  static const String unsavedFieldError = "Unsaved changes will be lost.";
+  static const String integerParseError = "This field must be a number.";
 
   static const String empty = "";
 }

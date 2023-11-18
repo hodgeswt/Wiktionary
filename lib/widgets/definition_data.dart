@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wiktionary/constants/dynamic_theme.dart';
 import 'package:wiktionary/constants/numbers.dart';
-import 'package:wiktionary/constants/settings.dart';
+import 'package:wiktionary/settings.dart';
 import 'package:wiktionary/constants/strings.dart';
 import 'package:wiktionary/datamodel/definition.dart';
 import 'package:wiktionary/datamodel/pronunciations.dart';
