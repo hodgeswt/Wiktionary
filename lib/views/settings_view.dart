@@ -28,15 +28,8 @@ class _SettingsViewState extends State<SettingsView> {
 
   String _apiHost = Settings.apiHost;
   late TextEditingController _apiHostController;
-
-  String _apiPort = Settings.apiPort;
-  late TextEditingController _apiPortController;
-
   String _savedApiHost = Settings.apiHost;
-  String _savedApiPort = Settings.apiPort;
-
   bool _apiHostModified = false;
-  bool _apiPortModified = false;
 
   bool _loadedPreferences = false;
 
@@ -51,14 +44,6 @@ class _SettingsViewState extends State<SettingsView> {
     setState(() {
       _apiHostModified = modified;
       _apiHost = newValue;
-    });
-  }
-
-  void _updateApiPort(String newValue) {
-    bool modified = newValue != _savedApiPort;
-    setState(() {
-      _apiPortModified = modified;
-      _apiPort = newValue;
     });
   }
 
@@ -99,16 +84,12 @@ class _SettingsViewState extends State<SettingsView> {
 
   void _saveConnectionPreferences() {
     _prefs.setString("apiHost", _apiHost);
-    _prefs.setString("apiPort", _apiPort);
 
     Settings.apiHost = _apiHost;
-    Settings.apiPort = _apiPort;
 
     setState(() {
       _apiHostModified = false;
-      _apiPortModified = false;
       _savedApiHost = _apiHost;
-      _savedApiPort = _apiPort;
     });
   }
 
@@ -125,7 +106,6 @@ class _SettingsViewState extends State<SettingsView> {
       _lightModeState = !Settings.darkMode;
       _colorState = Settings.color;
       _apiHost = Settings.apiHost;
-      _apiPort = Settings.apiPort;
     });
 
     setState(() {
@@ -141,24 +121,11 @@ class _SettingsViewState extends State<SettingsView> {
     return _apiHostModified ? Strings.unsavedFieldError : null;
   }
 
-  String? _apiPortFieldValidator(String? text) {
-    if (text == null || text.isEmpty) {
-      return Strings.nonNullFieldError;
-    }
-
-    if (int.tryParse(text) == null) {
-      return Strings.integerParseError;
-    }
-
-    return _apiPortModified ? Strings.unsavedFieldError : null;
-  }
-
   @override
   void initState() {
     super.initState();
 
     _apiHostController = TextEditingController(text: _apiHost);
-    _apiPortController = TextEditingController(text: _apiPort);
 
     _futurePrefs = SharedPreferences.getInstance();
 
@@ -276,12 +243,6 @@ class _SettingsViewState extends State<SettingsView> {
           controller: _apiHostController,
           onChanged: _updateApiHost,
           validator: _apiHostFieldValidator,
-        ),
-        TextSetting(
-          labelText: Strings.apiPortLabel,
-          controller: _apiPortController,
-          onChanged: _updateApiPort,
-          validator: _apiPortFieldValidator,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

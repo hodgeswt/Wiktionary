@@ -7,15 +7,15 @@ class DioClient {
 
   final Dio _dio = Dio();
 
-  String _baseUrl() => "http://${Settings.apiHost}:${Settings.apiPort}/word";
-  String _fullUrl(String searchLang, String searchTerm) =>
-      "${_baseUrl()}/$searchLang/$searchTerm";
-
   dynamic data = {};
 
   Future<Results?> getDefinition(String searchLang, String searchTerm) async {
-    final response = await _dio.get(
-      _fullUrl(searchLang, searchTerm),
+    final response = await _dio.post(
+      Settings.apiHost,
+      data: {
+        "word": searchTerm,
+        "lang": searchLang,
+      },
     );
 
     data = response.data;

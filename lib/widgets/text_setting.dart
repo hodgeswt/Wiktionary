@@ -29,7 +29,7 @@ class TextSettingState extends State<TextSetting> {
   Widget build(BuildContext context) {
     return ListTile(
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
             child: Text(widget.labelText),
@@ -42,6 +42,7 @@ class TextSettingState extends State<TextSetting> {
                 controller: widget.controller,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
+                  errorMaxLines: 3,
                 ),
                 onChanged: widget.onChanged,
                 validator: widget.validator,

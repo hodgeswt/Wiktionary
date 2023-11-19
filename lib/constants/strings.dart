@@ -33,7 +33,6 @@ class Strings {
 
   static const String nonNullFieldError = "This field cannot be empty.";
   static const String unsavedFieldError = "Unsaved changes will be lost.";
-  static const String integerParseError = "This field must be a number.";
 
   static const String empty = "";
 }
