@@ -15,8 +15,7 @@ class DefinitionData {
   static Widget definitionsBuilder(
       BuildContext context, Results? results, String word) {
     if (results == null || results.results.isEmpty) {
-      return const SingleChildScrollView(
-          child: SelectableText(Strings.noResults));
+      return Card(child: ListTile(title: Text('${Strings.noResults} "$word"')));
     }
 
     List<ResultData> data = results.results;
