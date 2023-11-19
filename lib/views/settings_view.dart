@@ -3,7 +3,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/link.dart';
 import 'package:wiktionary/constants/numbers.dart';
-import 'package:wiktionary/settings.dart';
+import 'package:wiktionary/storage.dart';
 import 'package:wiktionary/constants/strings.dart';
 import 'package:wiktionary/widgets/rebuilder.dart';
 import 'package:wiktionary/widgets/section.dart';
@@ -22,14 +22,14 @@ class _SettingsViewState extends State<SettingsView> {
   late Future<SharedPreferences> _futurePrefs;
   late SharedPreferences _prefs;
 
-  bool _lightModeState = !Settings.darkMode;
+  bool _lightModeState = !Storage.darkMode;
   late MaterialStateProperty<Icon?> lightModeIcon;
 
-  Color _colorState = Settings.color;
+  Color _colorState = Storage.color;
 
-  String _apiHost = Settings.apiHost;
+  String _apiHost = Storage.apiHost;
   late TextEditingController _apiHostController;
-  String _savedApiHost = Settings.apiHost;
+  String _savedApiHost = Storage.apiHost;
   bool _apiHostModified = false;
 
   bool _loadedPreferences = false;
@@ -71,8 +71,8 @@ class _SettingsViewState extends State<SettingsView> {
             TextButton(
               child: const Text(Strings.okButton),
               onPressed: () {
-                Settings.color = _colorState;
-                prefs.setInt("color", Settings.color.value);
+                Storage.color = _colorState;
+                prefs.setInt("color", Storage.color.value);
                 Navigator.of(context).pop();
                 Rebuilder.of(context).rebuild();
               },
@@ -86,7 +86,7 @@ class _SettingsViewState extends State<SettingsView> {
   void _saveConnectionPreferences() {
     _prefs.setString("apiHost", _apiHost);
 
-    Settings.apiHost = _apiHost;
+    Storage.apiHost = _apiHost;
 
     setState(() {
       _apiHostModified = false;
@@ -101,12 +101,12 @@ class _SettingsViewState extends State<SettingsView> {
 
     _prefs = prefs;
 
-    Settings.loadPreferences(prefs);
+    Storage.loadPreferences(prefs);
 
     setState(() {
-      _lightModeState = !Settings.darkMode;
-      _colorState = Settings.color;
-      _apiHost = Settings.apiHost;
+      _lightModeState = !Storage.darkMode;
+      _colorState = Storage.color;
+      _apiHost = Storage.apiHost;
     });
 
     setState(() {
@@ -134,7 +134,7 @@ class _SettingsViewState extends State<SettingsView> {
         MaterialStateProperty.resolveWith<Icon?>((Set<MaterialState> states) {
       Color color = Theme.of(context).colorScheme.primary;
       if (states.contains(MaterialState.hovered)) {
-        color = Settings.darkMode ? Colors.black : Colors.white;
+        color = Storage.darkMode ? Colors.black : Colors.white;
       }
 
       if (!states.contains(MaterialState.selected)) {
@@ -207,8 +207,8 @@ class _SettingsViewState extends State<SettingsView> {
                 title: const Text(Strings.lightModeText),
                 value: _lightModeState,
                 onChanged: (bool val) {
-                  Settings.darkMode = !val;
-                  prefs.setBool("darkMode", Settings.darkMode);
+                  Storage.darkMode = !val;
+                  prefs.setBool("darkMode", Storage.darkMode);
                   setState(() {
                     _lightModeState = val;
                   });

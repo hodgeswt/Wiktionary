@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wiktionary/settings.dart';
+import 'package:wiktionary/storage.dart';
 import 'package:wiktionary/constants/strings.dart';
 import 'package:wiktionary/views/main_view.dart';
 import 'package:wiktionary/widgets/rebuilder.dart';
@@ -33,13 +33,13 @@ class _MyAppState extends State<MyApp> {
           future: _prefs,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              Settings.loadPreferences(snapshot.data!);
+              Storage.loadPreferences(snapshot.data!);
             }
 
             return MaterialApp(
               title: 'Wiktionary',
               theme: ThemeData(
-                  useMaterial3: true, colorScheme: Settings.getColorScheme()),
+                  useMaterial3: true, colorScheme: Storage.getColorScheme()),
               home: const MainView(title: Strings.title),
             );
           },

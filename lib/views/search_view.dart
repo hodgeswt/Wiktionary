@@ -41,8 +41,10 @@ class _SearchViewState extends State<SearchView> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) =>
-              ResultsView(searchTerm: _searchTerm.toLowerCase())),
+        builder: (context) => ResultsView(
+          searchTerm: ResultsView.cleanSearchTerm(_searchTerm),
+        ),
+      ),
     );
   }
 

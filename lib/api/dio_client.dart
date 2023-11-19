@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:wiktionary/datamodel/results.dart';
-import 'package:wiktionary/settings.dart';
+import 'package:wiktionary/storage.dart';
 
 class DioClient {
   DioClient();
@@ -11,7 +11,7 @@ class DioClient {
 
   Future<Results?> getDefinition(String searchLang, String searchTerm) async {
     final response = await _dio.post(
-      Settings.apiHost,
+      Storage.apiHost,
       data: {
         "word": searchTerm,
         "lang": searchLang,

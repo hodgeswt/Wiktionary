@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wiktionary/datamodel/results.dart';
+import 'package:wiktionary/storage.dart';
 import 'package:wiktionary/widgets/definition_data.dart';
 import 'package:wiktionary/api/dio_client.dart';
 
@@ -10,6 +11,10 @@ class ResultsView extends StatefulWidget {
 
   @override
   State<ResultsView> createState() => _ResultsViewState();
+
+  static String cleanSearchTerm(String searchTerm) {
+    return searchTerm.trim().toLowerCase();
+  }
 }
 
 class _ResultsViewState extends State<ResultsView> {
@@ -21,6 +26,7 @@ class _ResultsViewState extends State<ResultsView> {
   void initState() {
     super.initState();
     _result = getDefinition();
+    Storage.addSearchHistory(widget.searchTerm);
   }
 
   Future<Results?> getDefinition() async {

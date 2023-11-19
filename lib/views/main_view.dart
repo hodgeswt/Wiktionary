@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wiktionary/constants/numbers.dart';
 import 'package:wiktionary/constants/strings.dart';
+import 'package:wiktionary/views/history_view.dart';
 import 'package:wiktionary/views/search_view.dart';
 import 'package:wiktionary/views/settings_view.dart';
 
@@ -36,6 +37,17 @@ class _MainViewState extends State<MainView> {
     );
   }
 
+  void _historyViewTransition() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HistoryView(
+          title: Strings.historyViewTitle,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +69,10 @@ class _MainViewState extends State<MainView> {
                 onPressed: _settingsViewTransition,
                 icon: const Icon(Icons.settings),
               ),
+              IconButton(
+                onPressed: _historyViewTransition,
+                icon: const Icon(Icons.history),
+              )
             ],
           ),
         ),

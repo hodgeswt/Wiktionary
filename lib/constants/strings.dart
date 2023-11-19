@@ -27,7 +27,7 @@ class Strings {
 
   static const String searchViewTitle = "Search";
   static const String settingsViewTitle = "Settings";
-  static const String historyTitle = "History";
+  static const String historyViewTitle = "History";
   static const String welcomeText = "Welcome to Wiktionary!";
   static const String serachContextText = "Wiktionary";
 
@@ -40,6 +40,9 @@ class Strings {
 
   static const String nonNullFieldError = "This field cannot be empty.";
   static const String unsavedFieldError = "Unsaved changes will be lost.";
+
+  static const String emptyHistory = "No search history";
+  static const String clearSearchHistory = "Clear";
 
   static const String empty = "";
 }
