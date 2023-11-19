@@ -50,7 +50,7 @@ class _HistoryViewState extends State<HistoryView> {
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: Numbers.defaultHorizontalPadding,
-            vertical: Numbers.defaultVerticalPadding,
+            vertical: Numbers.bigVerticalPadding,
           ),
           child: FilledButton(
             onPressed: _clearSearchHistory,

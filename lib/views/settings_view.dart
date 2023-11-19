@@ -5,6 +5,7 @@ import 'package:url_launcher/link.dart';
 import 'package:wiktionary/constants/numbers.dart';
 import 'package:wiktionary/storage.dart';
 import 'package:wiktionary/constants/strings.dart';
+import 'package:wiktionary/widgets/padded_text.dart';
 import 'package:wiktionary/widgets/rebuilder.dart';
 import 'package:wiktionary/widgets/section.dart';
 import 'package:wiktionary/widgets/text_setting.dart';
@@ -177,14 +178,14 @@ class _SettingsViewState extends State<SettingsView> {
         _buildConnectionSection(prefs),
         Column(
           children: <Widget>[
-            const Text(Strings.license),
-            const Text(Strings.attribution),
+            const PaddedText(text: Strings.license),
+            const PaddedText(text: Strings.attribution),
             Link(
               uri: Uri.parse(Strings.licenseLink),
               builder: (context, followLink) {
                 return TextButton(
                   onPressed: followLink,
-                  child: const Text(Strings.licenseLinkText),
+                  child: const PaddedText(text: Strings.licenseLinkText),
                 );
               },
             ),
