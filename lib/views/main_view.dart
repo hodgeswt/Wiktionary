@@ -62,6 +62,10 @@ class _MainViewState extends State<MainView> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
+                onPressed: _historyViewTransition,
+                icon: const Icon(Icons.history),
+              ),
+              IconButton(
                 onPressed: _searchViewTransition,
                 icon: const Icon(Icons.search),
               ),
@@ -69,10 +73,6 @@ class _MainViewState extends State<MainView> {
                 onPressed: _settingsViewTransition,
                 icon: const Icon(Icons.settings),
               ),
-              IconButton(
-                onPressed: _historyViewTransition,
-                icon: const Icon(Icons.history),
-              )
             ],
           ),
         ),

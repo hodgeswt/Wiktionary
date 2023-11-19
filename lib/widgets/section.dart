@@ -43,8 +43,9 @@ class _SectionState extends State<Section> {
                 child: ExpansionTile(
                   title: Text(widget.title),
                   initiallyExpanded: widget.initiallyExpanded,
-                  shape: const ContinuousRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  shape: ContinuousRectangleBorder(
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(Numbers.cornerRadius)),
                   ),
                   children: <Widget>[
                     Column(

@@ -13,9 +13,19 @@ class HistoryList {
       future: futurePrefs,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          List<String>? history = snapshot.data!.getStringList("searchHistory");
+
+          if (history == null || history.isEmpty) {
+            return const ListTile(
+              title: Card(
+                child: ListTile(
+                  title: Text(Strings.emptyHistory),
+                ),
+              ),
+            );
+          }
           return _buildHistoryList(
-            snapshot.data!.getStringList("searchHistory") ??
-                [Strings.emptyHistory],
+            history,
             preventScroll,
           );
         } else if (snapshot.hasError) {
@@ -29,7 +39,7 @@ class HistoryList {
   static Widget _buildHistoryList(List<String> history, bool preventScroll) {
     history = history.reversed.toList();
 
-    return ListView.separated(
+    return ListView.builder(
       padding: const EdgeInsets.symmetric(
         horizontal: Numbers.defaultHorizontalPadding,
         vertical: Numbers.defaultVerticalPadding,
@@ -37,24 +47,29 @@ class HistoryList {
       physics: preventScroll ? const NeverScrollableScrollPhysics() : null,
       itemCount: history.length,
       itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Center(
-            child: Text(history[index]),
-          ),
-          onTap: () {
-            String searchTerm = history[index];
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ResultsView(
-                  searchTerm: ResultsView.cleanSearchTerm(searchTerm),
+        return Card(
+          child: ListTile(
+            shape: ContinuousRectangleBorder(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(Numbers.cornerRadius)),
+            ),
+            title: Center(
+              child: Text(history[index]),
+            ),
+            onTap: () {
+              String searchTerm = history[index];
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsView(
+                    searchTerm: ResultsView.cleanSearchTerm(searchTerm),
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         );
       },
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }

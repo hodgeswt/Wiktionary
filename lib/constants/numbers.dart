@@ -6,4 +6,6 @@ class Numbers {
 
   static const double definitionTextHorizontalPadding = 8.0;
   static const double definitionTextVerticalPadding = 4.0;
+
+  static double cornerRadius = 30.0;
 }
