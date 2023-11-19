@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wiktionary/constants/numbers.dart';
 import 'package:wiktionary/constants/strings.dart';
 import 'package:wiktionary/views/results_view.dart';
+import 'package:wiktionary/widgets/history_list.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key, required this.title});
@@ -38,6 +39,8 @@ class _SearchViewState extends State<SearchView> {
       return;
     }
 
+    setState(() {});
+
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -67,32 +70,41 @@ class _SearchViewState extends State<SearchView> {
             horizontal: Numbers.defaultHorizontalPadding,
             vertical: Numbers.defaultVerticalPadding,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Column(
             children: <Widget>[
-              Expanded(
-                flex: 5,
-                child: TextField(
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: Strings.wordSearchHint,
-                  ),
-                  onChanged: _updateSearchTerm,
-                  onSubmitted: _textFieldSubmitted,
-                  autofocus: true,
-                ),
-              ),
-              Expanded(
-                child: IconButton(
-                  onPressed: _resultsViewTransition,
-                  icon: const Icon(Icons.search),
-                ),
-              )
+              _buildSearchField(),
+              Expanded(child: HistoryList.getHistoryList(preventScroll: true)),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSearchField() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Expanded(
+          flex: 5,
+          child: TextField(
+            controller: _controller,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: Strings.wordSearchHint,
+            ),
+            onChanged: _updateSearchTerm,
+            onSubmitted: _textFieldSubmitted,
+            autofocus: true,
+          ),
+        ),
+        Expanded(
+          child: IconButton(
+            onPressed: _resultsViewTransition,
+            icon: const Icon(Icons.search),
+          ),
+        )
+      ],
     );
   }
 }

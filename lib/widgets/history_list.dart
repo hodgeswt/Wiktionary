@@ -7,15 +7,16 @@ import 'package:wiktionary/views/results_view.dart';
 class HistoryList {
   HistoryList._();
 
-  static Widget getHistoryList() {
-    Future<SharedPreferences?> _futurePrefs = SharedPreferences.getInstance();
+  static Widget getHistoryList({bool preventScroll = false}) {
+    Future<SharedPreferences?> futurePrefs = SharedPreferences.getInstance();
     return FutureBuilder<SharedPreferences?>(
-      future: _futurePrefs,
+      future: futurePrefs,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return _buildHistoryList(
             snapshot.data!.getStringList("searchHistory") ??
                 [Strings.emptyHistory],
+            preventScroll,
           );
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
@@ -25,7 +26,7 @@ class HistoryList {
     );
   }
 
-  static Widget _buildHistoryList(List<String> history) {
+  static Widget _buildHistoryList(List<String> history, bool preventScroll) {
     history = history.reversed.toList();
 
     return ListView.separated(
@@ -33,6 +34,7 @@ class HistoryList {
         horizontal: Numbers.defaultHorizontalPadding,
         vertical: Numbers.defaultVerticalPadding,
       ),
+      physics: preventScroll ? const NeverScrollableScrollPhysics() : null,
       itemCount: history.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
