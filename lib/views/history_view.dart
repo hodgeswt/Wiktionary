@@ -23,7 +23,6 @@ class _HistoryViewState extends State<HistoryView> {
   @override
   void initState() {
     super.initState();
-    _futurePrefs = SharedPreferences.getInstance();
   }
 
   @override
