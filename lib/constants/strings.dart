@@ -2,7 +2,13 @@ class Strings {
   Strings._();
 
   static const String title = "Wiktionary";
-  static const String resultsTitle = "Search Results";
+  static const String license =
+      "Wiktionary Mobile © 2023 by Will Hodges is licensed under CC BY-SA 4.0.";
+  static const String attribution =
+      "Wiktionary content is available from Wiktionary under CC BY-SA 4.0";
+  static const String licenseLink =
+      "https://creativecommons.org/licenses/by-sa/4.0/deed.en";
+  static const String licenseLinkText = "CC BY-SA 4.0";
 
   static const String wordSearchHint = "Enter a word...";
   static const String searchButton = "Search";
@@ -21,8 +27,9 @@ class Strings {
 
   static const String searchViewTitle = "Search";
   static const String settingsViewTitle = "Settings";
+  static const String historyTitle = "History";
   static const String welcomeText = "Welcome to Wiktionary!";
-  static const String serachContextText = "Search with Wiktionary";
+  static const String serachContextText = "Wiktionary";
 
   static const String appearanceTitle = "Appearance";
   static const String connectionTitle = "Connection";

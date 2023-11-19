@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/link.dart';
 import 'package:wiktionary/constants/numbers.dart';
 import 'package:wiktionary/settings.dart';
 import 'package:wiktionary/constants/strings.dart';
@@ -174,6 +175,21 @@ class _SettingsViewState extends State<SettingsView> {
       children: <Widget>[
         _buildAppearanceSection(prefs),
         _buildConnectionSection(prefs),
+        Column(
+          children: <Widget>[
+            const Text(Strings.license),
+            const Text(Strings.attribution),
+            Link(
+              uri: Uri.parse(Strings.licenseLink),
+              builder: (context, followLink) {
+                return TextButton(
+                  onPressed: followLink,
+                  child: const Text(Strings.licenseLinkText),
+                );
+              },
+            ),
+          ],
+        ),
       ],
     );
   }
