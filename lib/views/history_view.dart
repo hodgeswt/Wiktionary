@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wiktionary/constants/numbers.dart';
 import 'package:wiktionary/storage.dart';
 import 'package:wiktionary/constants/strings.dart';
-import 'package:wiktionary/views/results_view.dart';
 import 'package:wiktionary/widgets/history_list.dart';
-import 'package:wiktionary/widgets/rebuilder.dart';
-import 'package:wiktionary/widgets/section.dart';
-import 'package:wiktionary/widgets/text_setting.dart';
 
 class HistoryView extends StatefulWidget {
   const HistoryView({super.key, required this.title});
@@ -20,22 +15,6 @@ class HistoryView extends StatefulWidget {
 }
 
 class _HistoryViewState extends State<HistoryView> {
-  late Future<SharedPreferences> _futurePrefs;
-
-  bool _loadedPreferences = false;
-
-  void _loadPreferences(SharedPreferences prefs) {
-    if (_loadedPreferences) {
-      return;
-    }
-
-    Storage.loadPreferences(prefs);
-
-    setState(() {
-      _loadedPreferences = true;
-    });
-  }
-
   void _clearSearchHistory() {
     Storage.clearSearchHistory();
     setState(() {});
