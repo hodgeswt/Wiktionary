@@ -6,7 +6,8 @@ class Storage {
 
   static const bool defaultDarkMode = false;
   static const Color defaultColor = Colors.blue;
-  static const String defaultApiHost = "localhost";
+  static const String defaultApiHost =
+      "https://jnwgwz66v2sy2ycostygu5fwl40jsord.lambda-url.us-east-1.on.aws/";
 
   static bool darkMode = defaultDarkMode;
   static Color color = defaultColor;

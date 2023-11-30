@@ -196,8 +196,29 @@ class DefinitionData {
     List<Widget> ret = [];
     int i = 1;
     for (String definitionText in definitionTexts) {
+      if (i == 1) {
+        ret.add(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Numbers.defaultHorizontalPadding,
+                    vertical: Numbers.bigVerticalPadding,
+                  ),
+                  child: ListTile(
+                    title: SearchableText(text: definitionText),
+                  )),
+            ],
+          ),
+        );
+
+        i++;
+        continue;
+      }
+
       Section texts = Section(
-        title: '${i++}',
+        title: '${i++ - 1}',
         content: <Widget>[
           ListTile(title: SearchableText(text: definitionText))
         ],
